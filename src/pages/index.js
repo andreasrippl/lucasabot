@@ -1,21 +1,66 @@
 import React from "react"
-import { Link } from "gatsby"
+import { graphql, Link } from "gatsby"
 
 import Layout from "../components/layout"
-import Image from "../components/image"
 import SEO from "../components/seo"
 
-const IndexPage = () => (
-  <Layout>
-    <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
-    </div>
-    <Link to="/page-2/">Go to page 2</Link>
-  </Layout>
-)
+class IndexPage extends React.Component {
+    render() {
+        const {
+            data: { homepage, projects },
+        } = this.props
+        console.log(projects)
+        return(
+            <Layout>
+                <SEO title="Home" keywords={["gatsby", "application", "react"]} />
+                <div dangerouslySetInnerHTML={{ __html: homepage.data.description.html}} />
+                <div>
+                    {projects.edges.map(project => (
+                        <div key={project.node.id}>
+                            <Link to={project.node.uid}>
+                                <img src={project.node.data.thumbnail.url} />
+                            </Link>
+                        </div>
+                    ))}
+                </div>
+            </Layout>
+        )
+    }
+}
 
 export default IndexPage
+
+export const pageQuery = graphql`
+query IndexQuery {
+  homepage: prismicHomepage {
+		id
+		data {
+		  title {
+			  text
+		  }
+		  description {
+			  html
+      }
+    }
+  }
+  projects: allPrismicProjects {
+    edges {
+      node {
+        id
+        uid
+        data {
+          title {
+          text
+        }
+        thumbnail {
+          alt
+          url
+        }
+        description {
+          html
+        }
+      }
+    }
+  }
+}}
+`
