@@ -9,10 +9,9 @@ class IndexPage extends React.Component {
         const {
             data: { homepage, projects },
         } = this.props
-        console.log(projects)
         return(
             <Layout>
-                <SEO title="Home" keywords={["gatsby", "application", "react"]} />
+                <SEO title="Luca Sabot" keywords={["Luca Sabot", "Artist", "Machines"]} />
                 <div>
                     {projects.edges.map(project => (
                         <div key={project.node.id}>
@@ -55,9 +54,7 @@ query IndexQuery {
           alt
           url
         }
-        description {
-          html
-        }
+
       }
     }
   }

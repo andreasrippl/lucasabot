@@ -11,7 +11,7 @@ class About extends React.Component {
         } = this.props
         return (
             <Layout>
-                <SEO title="Page two" />
+                <SEO title="About" />
                 <h1>About Me</h1>
                 <div dangerouslySetInnerHTML={{ __html: about.data.content.html }} />
             </Layout>
