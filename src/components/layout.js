@@ -44,7 +44,7 @@ const Layout = ({ children }) => (
             <Main>{children}</Main>
             <Footer>
                 <div>© {new Date().getFullYear()}, Luca Sabot</div>
-                <div>Website by <a href="https://www.gatsbyjs.org">Andreas Rippl</a></div>
+                <div>Website by <a href="https://rippl.at">Andreas Rippl</a></div>
             </Footer>
         </Content>
       </>
