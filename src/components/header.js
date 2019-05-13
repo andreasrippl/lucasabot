@@ -1,8 +1,22 @@
 import { StaticQuery, Link } from "gatsby"
-import PropTypes from "prop-types"
 import React from "react"
+import styled from "styled-components"
+import Menu from "./menu"
+const Heading = styled.h1`
+  font-weight: 500;
+  font-size: 1.6rem;
+  padding: 1rem;
+  color: black;
+  a{
+      color: black;
+      text-decoration: none;
 
-const Header = ({ siteTitle }) => (
+  }
+`
+const StyledHeader = styled.header`
+  position: fixed;
+`
+const Header = () => (
     <StaticQuery
         query={graphql`
       query HeadingQuery {
@@ -17,41 +31,16 @@ const Header = ({ siteTitle }) => (
       }
     `}
         render={data => (
-            <header
-                style={{
-                    marginBottom: "1.45rem",
-                }}
-            >
-                <div
-                    style={{
-                        margin: "0 auto",
-                        maxWidth: 960,
-                        padding: "1.45rem 1.0875rem",
-                    }}
-                >
-                    <h1 style={{ margin: 0 }}>
-                        <Link
-                            to="/"
-                            style={{
-                                color: "black",
-                                textDecoration: "none",
-                            }}
-                        >
-                            {data.prismicHomepage.data.title.text}                        
-                        </Link>
-                    </h1>
-                </div>
-            </header>
+            <StyledHeader>
+                <Heading>
+                    <Link to="/">
+                        {data.prismicHomepage.data.title.text}                        
+                    </Link>
+                </Heading>
+                <Menu/>
+            </StyledHeader>
         )}
     />
 )
-
-Header.propTypes = {
-    siteTitle: PropTypes.string,
-}
-
-Header.defaultProps = {
-    siteTitle: "",
-}
 
 export default Header

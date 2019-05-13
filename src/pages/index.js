@@ -13,7 +13,6 @@ class IndexPage extends React.Component {
         return(
             <Layout>
                 <SEO title="Home" keywords={["gatsby", "application", "react"]} />
-                <div dangerouslySetInnerHTML={{ __html: homepage.data.description.html}} />
                 <div>
                     {projects.edges.map(project => (
                         <div key={project.node.id}>
@@ -39,7 +38,7 @@ query IndexQuery {
 			  text
 		  }
 		  description {
-			  html
+			  text
       }
     }
   }
