@@ -7,40 +7,40 @@ const Heading = styled.h1`
   font-size: 1.6rem;
   padding: 1rem;
   color: black;
-  a{
-      color: black;
-      text-decoration: none;
-
+  a {
+    color: black;
+    text-decoration: none;
   }
 `
 const StyledHeader = styled.header`
   position: fixed;
+  @media only screen and (max-width: 600px) {
+    background: #fff;
+  }
 `
 const Header = () => (
-    <StaticQuery
-        query={graphql`
+  <StaticQuery
+    query={graphql`
       query HeadingQuery {
-         prismicHomepage {
-			  id
-        data{
-          title {
-            text
+        prismicHomepage {
+          id
+          data {
+            title {
+              text
+            }
           }
         }
-		  }
       }
     `}
-        render={data => (
-            <StyledHeader>
-                <Heading>
-                    <Link to="/">
-                        {data.prismicHomepage.data.title.text}                        
-                    </Link>
-                </Heading>
-                <Menu/>
-            </StyledHeader>
-        )}
-    />
+    render={data => (
+      <StyledHeader>
+        <Heading>
+          <Link to="/">{data.prismicHomepage.data.title.text}</Link>
+        </Heading>
+        <Menu />
+      </StyledHeader>
+    )}
+  />
 )
 
 export default Header
