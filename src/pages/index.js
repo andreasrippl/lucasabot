@@ -9,6 +9,14 @@ const Heading = styled.h1`
   font-size: 1.6rem;
   color: black;
 `
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+`
+const Img = styled.img`
+  max-height: 100vh;
+  min-height: 600px;
+`
 class IndexPage extends React.Component {
   render() {
     const {
@@ -20,16 +28,16 @@ class IndexPage extends React.Component {
           title="Luca Sabot"
           keywords={["Luca Sabot", "Artist", "Machines"]}
         />
-        <div>
+        <Container>
           {projects.edges.map(project => (
             <div key={project.node.id}>
               <Link to={project.node.uid}>
                 <Heading>{project.node.data.title.text}</Heading>
-                <img src={project.node.data.thumbnail.url} />
+                <Img src={project.node.data.thumbnail.url} />
               </Link>
             </div>
           ))}
-        </div>
+        </Container>
       </Layout>
     )
   }
