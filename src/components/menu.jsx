@@ -67,7 +67,7 @@ const StyledNav = styled.nav`
   @media only screen and (max-width: 800px) {
     margin-top: 1rem;
   }
-  @media only screen and (max-width: 600px) {
+  @media only screen and (max-width: 700px) {
     width: 100vw;
     justify-content: flex-end;
     margin-top: -1rem;

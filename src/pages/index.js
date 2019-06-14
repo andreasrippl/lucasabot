@@ -1,6 +1,6 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
-
+import Img from "gatsby-image"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import styled from "styled-components"
@@ -11,12 +11,13 @@ const Heading = styled.h1`
 `
 const Container = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
 `
-const Img = styled.img`
-  max-height: 100vh;
-  min-height: 600px;
+const Project = styled.div`
+  margin-bottom: 2rem;
 `
+const StyledImg = styled(Img)``
 class IndexPage extends React.Component {
   render() {
     const {
@@ -30,12 +31,17 @@ class IndexPage extends React.Component {
         />
         <Container>
           {projects.edges.map(project => (
-            <div key={project.node.id}>
+            <Project key={project.node.id}>
               <Link to={project.node.uid}>
                 <Heading>{project.node.data.title.text}</Heading>
-                <Img src={project.node.data.thumbnail.url} />
+                <StyledImg
+                  fluid={
+                    project.node.data.thumbnail.localFile.childImageSharp.fluid
+                  }
+                  objectFit="contain"
+                />
               </Link>
-            </div>
+            </Project>
           ))}
         </Container>
       </Layout>
@@ -68,8 +74,13 @@ export const pageQuery = graphql`
               text
             }
             thumbnail {
-              alt
-              url
+              localFile {
+                childImageSharp {
+                  fluid(maxWidth: 1000) {
+                    ...GatsbyImageSharpFluid_noBase64
+                  }
+                }
+              }
             }
           }
         }

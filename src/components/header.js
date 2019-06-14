@@ -11,10 +11,15 @@ const Heading = styled.h1`
     color: black;
     text-decoration: none;
   }
+  @media only screen and (max-width: 700px) {
+    margin-bottom: 0;
+  }
 `
 const StyledHeader = styled.header`
-  position: fixed;
-  @media only screen and (max-width: 600px) {
+  z-index: 10
+  border-bottom: 1px solid black;
+  @media only screen and (max-width: 700px) {
+    position: fixed;
     background: #fff;
   }
 `
